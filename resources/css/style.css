@@ -57,6 +57,7 @@ input {
 }
 .track {
   border-bottom: 1px solid lightgray;
+  vertical-align: middle;
 }
 .icon {
   text-align: center;
@@ -64,9 +65,9 @@ input {
 .fa-play-circle-o {
   color: rgb(255, 0 , 171);
 }
-
-
-
+.results-row {
+  display: flex;
+}
 
 
 

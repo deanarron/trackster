@@ -5,14 +5,19 @@ var tracksterAPI = '91e37275c5fba0735bff75d55021cca7';
   Append each "row" to the container in the body to display all tracks.
 */
 Trackster.renderTracks = function(tracks) {
+  $('#results').empty();
   for (var i = 0; i < tracks.length; i++) {
-    var trackResult = '<div class="row">'
+
+    var mediumAlbumArt = tracks[i].image[1]["#text"];
+    var albumArt = '<img src="'+ mediumAlbumArt +'">';
+
+    var trackResult = '<div class="row results-row">'
         + '<div class="col-xs-2 track icon">'
         + '<a href="'+ tracks[i].url +'">'
         + '<i class="fa fa-play-circle-o fa-lg"></i></a></div>'
-        + '<div class="col-xs-4 track">'+ tracks[i].name +'</div>'
+        + '<div class="col-xs-4 track"><span>'+ tracks[i].name +'</span></div>'
         + '<div class="col-xs-2 track">'+ tracks[i].artist +'</div>'
-        + '<div class="col-xs-2 track">Album</div>'
+        + '<div class="col-xs-2 track">' + albumArt + '</div>'
         + '<div class="col-xs-2 track">'+ tracks[i].listeners +'</div>'
         + '</div>';
     $('#results').append(trackResult);
@@ -25,7 +30,7 @@ Trackster.renderTracks = function(tracks) {
 */
 Trackster.searchTracksByTitle = function(title) {
   $.ajax({
-    url: 'http://ws.audioscrobbler.com/2.0/?method=track.search&track=' + title + '&api_key=91e37275c5fba0735bff75d55021cca7&format=json',
+    url: 'http://ws.audioscrobbler.com/2.0/?method=track.search&track=' + title + '&api_key='+ tracksterAPI +'&format=json',
     datatype:'jsonp',
     success: function(data) {
       Trackster.renderTracks(data.results.trackmatches.track);
